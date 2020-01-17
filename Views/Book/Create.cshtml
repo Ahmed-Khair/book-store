@@ -1,0 +1,61 @@
+﻿@model book_store.view_models.book_authermodel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>book_authermodel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            @*////enctype="multipart/form-data to upload img file in http request////*@
+            @if (ViewBag.Message != null)
+            {
+                <h5 class="alert alert-danger">@ViewBag.Message</h5>
+            }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                    <label asp-for="Idbook" class="control-label"></label>
+                    <input asp-for="Idbook" class="form-control" />
+                    <span asp-validation-for="Idbook" class="text-danger"></span>
+                </div>*@
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            @*/////to upload image///////*@
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input type="file" name="File" asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            @*/* to make select items of authers */*@
+            <div class="form-group">
+                <label asp-for="Id_auther" class="control-label"></label>
+                <select asp-for="Id_auther" class="form-control"
+                        asp-items="@(new SelectList(Model.authers , "Id_auther" , "Name"))"></select>
+                <span asp-validation-for="Id_auther" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+@section Scripts {
+    <partial name="validation" />
+}

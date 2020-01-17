@@ -1,0 +1,64 @@
+﻿@model IEnumerable<book_store.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-bordered table-striped table-hover" >
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Idbook)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auther.Name)
+            </th>
+            <th>
+                Imag:                       @*/* to view image in index*/*@
+            </th>            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idbook)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Auther.Name)
+            </td>
+
+            <td>
+                @if (item.imageurl != null)   @*/////if عشان لوفيه كتاب مش ليه صوره متتعرضش /////*@
+                {
+                    <img src="~/uploads/@item.imageurl" style="width:50px;" class="img-thumbnail" /> @*/* to view image in index*/*@
+
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Idbook }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Idbook }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Idbook })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
